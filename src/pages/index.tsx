@@ -7,6 +7,7 @@ import { useWindowEventListener } from "../lib/hooks"
 
 import { trabalhos } from "../assets/trabalhos"
 import indexStyle from "./index.module.scss"
+import { isMobile } from "react-device-detect"
 
 
 export default function Index(){
@@ -61,19 +62,21 @@ function CoisasQueFiz({children} : ChildrenString){
 }
 
 function SpanByMouse({children} : ChildrenString){
-    const [peso, setPeso] = useState<number>(800)
+    const [peso, setPeso] = useState<number>((!isMobile) ? 800 : 740)
     let spanRef = useRef<HTMLSpanElement>()
     const mudarPeso = (e : Event) => {
-        /* const tg = e.currentTarget
-        const bounds = tg.getBoundingClientRect() */
-        const span = spanRef.current
-        if(span !== undefined && isMouseEvent(e)){
-            const bounds = span.getBoundingClientRect()
-            const dist = Math.sqrt(
-                Math.pow(e.clientX - bounds.x, 2)
-                + Math.pow(e.clientY - bounds.y, 2)
-            )
-            setPeso(mapear(Math.sqrt(dist), 0, Math.sqrt(700), 800, 720))
+        if(!isMobile){
+            /* const tg = e.currentTarget
+            const bounds = tg.getBoundingClientRect() */
+            const span = spanRef.current
+            if(span !== undefined && isMouseEvent(e)){
+                const bounds = span.getBoundingClientRect()
+                const dist = Math.sqrt(
+                    Math.pow(e.clientX - bounds.x, 2)
+                    + Math.pow(e.clientY - bounds.y, 2)
+                )
+                setPeso(mapear(Math.sqrt(dist), 0, Math.sqrt(700), 800, 720))
+            }
         }
     }
 
