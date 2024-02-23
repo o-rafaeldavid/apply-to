@@ -73,7 +73,7 @@ function SpanByMouse({children} : ChildrenString){
                 Math.pow(e.clientX - bounds.x, 2)
                 + Math.pow(e.clientY - bounds.y, 2)
             )
-            setPeso(antes => mapear(Math.sqrt(dist), 0, Math.sqrt(700), 800, 720))
+            setPeso(mapear(Math.sqrt(dist), 0, Math.sqrt(700), 800, 720))
         }
     }
 
